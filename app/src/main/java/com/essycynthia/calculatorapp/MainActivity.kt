@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.spacedBy(buttonSpacing),
             ) {
                 Text(
-                    text = state.number1 + (state.operation?.symbol ?: "") + state.number2,
+                    text = (state.openBrackets?.symbol) + state.number1 + (state.operation?.symbol ?: "") + state.number2 + (state.closeBrackets?.symbol) ,
                     textAlign = TextAlign.End,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -80,15 +80,13 @@ class MainActivity : ComponentActivity() {
                         symbol = "(", modifier = Modifier.aspectRatio(1f)
                             .weight(1f), color = peach
                     ) {
-                        viewModel.onAction(CalculatorAction.Clear)
-
+                        viewModel.onAction(CalculatorAction.Brackets(CalculatorBrackets.OpenBrackets))
                     }
                     CalculatorButton(
                         symbol = ")", modifier = Modifier.aspectRatio(1f)
                             .weight(1f), color = peach
                     ) {
-                        viewModel.onAction(CalculatorAction.Clear)
-
+                        viewModel.onAction(CalculatorAction.Brackets(CalculatorBrackets.CloseBrackets))
                     }
                     CalculatorButton(
                         symbol = "/", modifier = Modifier.aspectRatio(1f)

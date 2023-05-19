@@ -13,6 +13,7 @@ class CalculatorViewModel : ViewModel() {
             is CalculatorAction.Delete -> delete()
             is CalculatorAction.Clear -> state = CalculatorState()
             is CalculatorAction.Calculate -> calculate()
+            is CalculatorAction.Brackets -> enterBrackets(action.brackets)
             is CalculatorAction.Decimal -> enterDecimal()
             is CalculatorAction.Operation -> enterOperation(action.operation)
 
@@ -20,78 +21,97 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    private fun enterOperation(operation: CalculatorOperation) {
-        if (state.number1.isNotBlank()) {
-            state = state.copy(operation = operation)
+    private fun enterBrackets(brackets: CalculatorBrackets) {
+        val condition = state.number1.isNotEmpty() || state.number2.isNotEmpty()
 
-        }
-
-    }
-
-    private fun enterDecimal() {
-        if (state.operation ==null && !state.number1.contains(".") && state.number1.isNotBlank()){
-            state = state.copy(
-                number1 = state.number1 + "."
-            )
+        if (state.openBrackets != null && condition) {
+            state = state.copy(closeBrackets = CalculatorBrackets.CloseBrackets)
             return
-        }else if(!state.number2.contains(".") && state.number2.isNotBlank()) {
-            state = state.copy(
-                number2 = state.number2 + "."
-            )
         }
+
+        state = state.copy(openBrackets = brackets)
     }
 
-    private fun calculate() {
-        val number1 = state.number1.toDoubleOrNull()
-        val number2 = state.number2.toDoubleOrNull()
-        if(number1 != null && number2 != null) {
-            val result = when(state.operation) {
-                is CalculatorOperation.Add -> number1 + number2
-                is CalculatorOperation.Subtract -> number1 - number2
-                is CalculatorOperation.Multiply -> number1 * number2
-                is CalculatorOperation.Divide -> number1 / number2
-                null -> return
-            }
-            state = state.copy(
-                number1 = result.toString().take(15),
-                number2 = "",
-                operation = null
-            )
-        }    }
 
-    private fun enterNumber(number: Int) {
-        if(state.operation == null) {
-            if(state.number1.length >= MAX_NUM_LENGTH) {
+
+
+
+
+    private fun enterOperation(operation: CalculatorOperation) {
+            if (state.number1.isNotBlank()) {
+                state = state.copy(operation = operation)
+
+            }
+
+        }
+
+        private fun enterDecimal() {
+            if (state.operation == null && !state.number1.contains(".") && state.number1.isNotBlank()) {
+                state = state.copy(
+                    number1 = state.number1 + "."
+                )
+                return
+            } else if (!state.number2.contains(".") && state.number2.isNotBlank()) {
+                state = state.copy(
+                    number2 = state.number2 + "."
+                )
+            }
+        }
+
+        private fun calculate() {
+            val number1 = state.number1.toDoubleOrNull()
+            val number2 = state.number2.toDoubleOrNull()
+            if (number1 != null && number2 != null) {
+                val result = when (state.operation) {
+                    is CalculatorOperation.Add -> number1 + number2
+                    is CalculatorOperation.Subtract -> number1 - number2
+                    is CalculatorOperation.Multiply -> number1 * number2
+                    is CalculatorOperation.Divide -> number1 / number2
+                    null -> return
+                }
+                state = state.copy(
+                    number1 = result.toString().take(15),
+                    number2 = "",
+                    operation = null
+                )
+            }
+        }
+
+        private fun enterNumber(number: Int) {
+            if (state.operation == null) {
+                if (state.number1.length >= MAX_NUM_LENGTH) {
+                    return
+                }
+                state = state.copy(
+                    number1 = state.number1 + number
+                )
+                return
+            }
+            if (state.number2.length >= MAX_NUM_LENGTH) {
                 return
             }
             state = state.copy(
-                number1 = state.number1 + number
+                number2 = state.number2 + number
             )
-            return
+
         }
-        if(state.number2.length >= MAX_NUM_LENGTH) {
-            return
+
+        private fun delete() {
+            when {
+                state.number2.isNotBlank() -> state = state.copy(
+                    number2 = state.number2.dropLast(1)
+                )
+                state.operation != null -> state = state.copy(
+                    operation = null
+                )
+                state.number1.isNotBlank() -> state = state.copy(
+                    number1 = state.number1.dropLast(1)
+                )
+            }
         }
-        state = state.copy(
-            number2 = state.number2 + number
-        )
+
+        companion object {
+            private const val MAX_NUM_LENGTH = 8
+        }
 
     }
-
-    private fun delete() {
-        when {
-            state.number2.isNotBlank() -> state = state.copy(
-                number2 = state.number2.dropLast(1)
-            )
-            state.operation != null -> state = state.copy(
-                operation = null
-            )
-            state.number1.isNotBlank() -> state = state.copy(
-                number1 = state.number1.dropLast(1)
-            )
-        }    }
-    companion object {
-        private const val MAX_NUM_LENGTH = 8
-    }
-
-}
