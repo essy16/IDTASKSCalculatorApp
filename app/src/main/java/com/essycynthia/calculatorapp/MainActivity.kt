@@ -54,7 +54,12 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.spacedBy(buttonSpacing),
             ) {
                 Text(
-                    text = (state.openBrackets?.symbol) + state.number1 + (state.operation?.symbol ?: "") + state.number2 + (state.closeBrackets?.symbol) ,
+                    text =
+                    (state.openBrackets?.symbol ?: "") +
+                            state.number1 +
+                            (state.operation?.symbol ?: "") +
+                            state.number2 +
+                            (state.closeBrackets?.symbol ?: ""),
                     textAlign = TextAlign.End,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -70,26 +75,30 @@ class MainActivity : ComponentActivity() {
                     horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
                 ) {
                     CalculatorButton(
-                        symbol = "C", modifier = Modifier.aspectRatio(1f)
+                        symbol = "C", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Cadmium_Yellow
                     ) {
                         viewModel.onAction(CalculatorAction.Clear)
 
                     }
                     CalculatorButton(
-                        symbol = "(", modifier = Modifier.aspectRatio(1f)
+                        symbol = "(", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = peach
                     ) {
                         viewModel.onAction(CalculatorAction.Brackets(CalculatorBrackets.OpenBrackets))
                     }
                     CalculatorButton(
-                        symbol = ")", modifier = Modifier.aspectRatio(1f)
+                        symbol = ")", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = peach
                     ) {
                         viewModel.onAction(CalculatorAction.Brackets(CalculatorBrackets.CloseBrackets))
                     }
                     CalculatorButton(
-                        symbol = "/", modifier = Modifier.aspectRatio(1f)
+                        symbol = "/", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Light_Violet
                     ) {
                         viewModel.onAction(CalculatorAction.Operation(CalculatorOperation.Divide))
@@ -103,28 +112,32 @@ class MainActivity : ComponentActivity() {
                     horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
                 ) {
                     CalculatorButton(
-                        symbol = "7", modifier = Modifier.aspectRatio(1f)
+                        symbol = "7", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(7))
 
                     }
                     CalculatorButton(
-                        symbol = "8", modifier = Modifier.aspectRatio(1f)
+                        symbol = "8", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(8))
 
                     }
                     CalculatorButton(
-                        symbol = "9", modifier = Modifier.aspectRatio(1f)
+                        symbol = "9", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(9))
 
                     }
                     CalculatorButton(
-                        symbol = "*", modifier = Modifier.aspectRatio(1f)
+                        symbol = "*", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Light_Violet
                     ) {
                         viewModel.onAction(CalculatorAction.Operation(CalculatorOperation.Multiply))
@@ -138,28 +151,32 @@ class MainActivity : ComponentActivity() {
                     horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
                 ) {
                     CalculatorButton(
-                        symbol = "4", modifier = Modifier.aspectRatio(1f)
+                        symbol = "4", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(4))
 
                     }
                     CalculatorButton(
-                        symbol = "5", modifier = Modifier.aspectRatio(1f)
+                        symbol = "5", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(5))
 
                     }
                     CalculatorButton(
-                        symbol = "6", modifier = Modifier.aspectRatio(1f)
+                        symbol = "6", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(6))
 
                     }
                     CalculatorButton(
-                        symbol = "+", modifier = Modifier.aspectRatio(1f)
+                        symbol = "+", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Light_Violet
                     ) {
                         viewModel.onAction(CalculatorAction.Operation(CalculatorOperation.Add))
@@ -173,28 +190,32 @@ class MainActivity : ComponentActivity() {
                     horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
                 ) {
                     CalculatorButton(
-                        symbol = "1", modifier = Modifier.aspectRatio(1f)
+                        symbol = "1", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(1))
 
                     }
                     CalculatorButton(
-                        symbol = "2", modifier = Modifier.aspectRatio(1f)
+                        symbol = "2", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(2))
 
                     }
                     CalculatorButton(
-                        symbol = "3", modifier = Modifier.aspectRatio(1f)
+                        symbol = "3", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(3))
 
                     }
                     CalculatorButton(
-                        symbol = "-", modifier = Modifier.aspectRatio(1f)
+                        symbol = "-", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Light_Violet
                     ) {
                         viewModel.onAction(CalculatorAction.Operation(CalculatorOperation.Subtract))
@@ -208,28 +229,32 @@ class MainActivity : ComponentActivity() {
                     horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
                 ) {
                     CalculatorButton(
-                        symbol = ".", modifier = Modifier.aspectRatio(1f)
+                        symbol = ".", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Decimal)
 
                     }
                     CalculatorButton(
-                        symbol = "0", modifier = Modifier.aspectRatio(1f)
+                        symbol = "0", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Color.White
                     ) {
                         viewModel.onAction(CalculatorAction.Number(0))
 
                     }
                     CalculatorButton(
-                        symbol = "DEL", modifier = Modifier.aspectRatio(1f)
+                        symbol = "DEL", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Bright_purple
                     ) {
                         viewModel.onAction(CalculatorAction.Delete)
 
                     }
                     CalculatorButton(
-                        symbol = "=", modifier = Modifier.aspectRatio(1f)
+                        symbol = "=", modifier = Modifier
+                            .aspectRatio(1f)
                             .weight(1f), color = Light_Violet
                     ) {
                         viewModel.onAction(CalculatorAction.Calculate)

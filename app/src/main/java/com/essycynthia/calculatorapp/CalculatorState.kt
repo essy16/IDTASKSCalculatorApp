@@ -6,6 +6,5 @@ data class CalculatorState(
     val openBrackets: CalculatorBrackets? = null,
     val closeBrackets: CalculatorBrackets? = null,
     val operation: CalculatorOperation? = null
-//    val operation: List<CalculatorOperation?> = emptyList()
 
 )
