@@ -19,8 +19,9 @@ fun CalculatorButton(
     symbol: String,
     modifier: Modifier,
     color: Color = Color.White,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -29,7 +30,8 @@ fun CalculatorButton(
             .background(color)
             .then(modifier)
     ) {
-        Text(text = symbol,
+        Text(
+            text = symbol,
             fontSize = 30.sp,
             color = MaterialTheme.colors.primary
 

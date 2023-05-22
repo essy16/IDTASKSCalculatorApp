@@ -1,44 +1,50 @@
 package com.essycynthia.calculatorapp
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.essycynthia.calculatorapp.ui.theme.*
-import java.nio.file.Paths.get
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CalculatorAppTheme {
+//This indicates that the tests are to be run with an Android JUnit runner and not with a regular JUnit runner.
+@RunWith(AndroidJUnit4::class)
+class CalculatorUITest {
+    @get:Rule
+    //createComposeRule is required because it provides us access to our composable components
+    val composeTestRule = createComposeRule()
 
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
-                ) {
-                    calculatorUI()
+    @Test
+    fun calculatorUI_ShouldDisplayNumber_WhenButtonClicked() {
+        composeTestRule.setContent {
+            CalculatorAppTheme() {
+                calculatorUI()
 
-                }
+
+
             }
         }
+        composeTestRule.onNodeWithText("1").performClick()
     }
 
-    @Preview
     @Composable
-     fun calculatorUI() {
+    fun calculatorUI() {
         val viewModel = viewModel<CalculatorViewModel>()
         val state = viewModel.state
         val buttonSpacing = 8.dp
@@ -296,6 +302,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-
